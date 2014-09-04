@@ -5,6 +5,7 @@ lib/App/MultiSsh.pm
 LICENSE
 Makefile.PL
 MANIFEST
+META.json
 META.yml
 README
 t/00-load.t
