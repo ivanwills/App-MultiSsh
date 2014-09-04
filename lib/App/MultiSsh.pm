@@ -18,7 +18,7 @@ use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 
 
-our $VERSION     = version->new('HASH(0x3093288)');
+our $VERSION     = version->new('0.01');
 our @EXPORT_OK   = qw//;
 our %EXPORT_TAGS = ();
 #our @EXPORT      = qw//;
@@ -46,7 +46,7 @@ App::MultiSsh - <One-line description of module's purpose>
 
 =head1 VERSION
 
-This documentation refers to App::MultiSsh version HASH(0x3093288)
+This documentation refers to App::MultiSsh version 0.01
 
 
 =head1 SYNOPSIS
