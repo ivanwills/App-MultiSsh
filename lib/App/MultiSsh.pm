@@ -14,7 +14,7 @@ use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 
 our $VERSION     = 0.01;
-our @EXPORT_OK   = qw/hosts_from_map is_host shell_quote/;
+our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote/;
 our %EXPORT_TAGS = ();
 
 sub hosts_from_map {
@@ -71,6 +71,59 @@ sub shell_quote {
     }
 
     return $text;
+}
+
+sub multi_run {
+    my ($hosts, $remote_cmd, $option) = @_;
+
+    # store child processes if forking
+    my @children;
+
+    # loop over each host and run the remote command
+    for my $host (@$hosts) {
+        my $cmd = "ssh $host " . shell_quote($remote_cmd);
+        print "$cmd\n" if $option->{verbose} || $option->{test};
+        next if $option->{test};
+
+        if ( $option->{parallel} ) {
+            my $child = fork;
+
+            if ( $child ) {
+                # parent stuff
+                push @children, $child;
+
+                if ( @children == $option->{parallel} ) {
+                    warn "Waiting for children to finish\n" if $option->{verbose} > 1;
+                    # reap children if reached max fork count
+                    while ( my $pid = shift @children ) {
+                        waitpid $pid, 0;
+                    }
+                }
+            }
+            elsif ( defined $child ) {
+                # child code
+                if ( $option->{interleave} ) {
+                    exec "$cmd 2>&1";
+                }
+                else {
+                    my $out = `$cmd 2>&1`;
+
+                    print "\n$cmd\n";
+                    print $out;
+                }
+                exit;
+            }
+            else {
+                die "Error: $!\n";
+            }
+        }
+        else {
+            system $cmd;
+        }
+    }
+
+    # reap any outstanding children
+    wait;
 }
 
 1;
