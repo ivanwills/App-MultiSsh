@@ -1,5 +1,15 @@
 Revision history for App-MultiSsh
 
-0.0.1   2014-09-04
-        First version, released on an unsuspecting world.
-
+0.01    2014-09-04
+        Fixed boilerplate
+        Fixed bad variable
+        Corrected license
+        Added missing file
+        Fixed spelling test
+        Other files
+        Removed unused/unneeded dependencies
+        Updated manifest
+        Added full boilerplate testing
+        Fixed to test test module and command
+        Got compiling
+        Initial commit
