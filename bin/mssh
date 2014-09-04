@@ -16,6 +16,7 @@ use English qw/ -no_match_vars /;
 use FindBin qw/$Bin/;
 use Path::Class;
 use POSIX ":sys_wait_h";
+use App::MultiSsh qw/hosts_from_map is_host shell_quote/;
 
 our $VERSION = version->new('0.0.1');
 my ($name)   = $PROGRAM_NAME =~ m{^.*/(.*?)$}mxs;
@@ -71,7 +72,7 @@ sub main {
     }
 
     if ( !@ARGV ) {
-        exec $option{cssh}, get_hosts($option{host});
+        exec $option{cssh}, hosts_from_map($option{host});
     }
 
     # do stuff here
@@ -82,7 +83,7 @@ sub main {
         push @{$option{host}}, @ARGV;
     }
 
-    my @hosts = get_hosts($option{host});
+    my @hosts = hosts_from_map($option{host});
 
     if ( !@hosts ) {
         warn "You must specify at least one host!\n";
@@ -142,63 +143,6 @@ sub main {
     wait;
 
     return;
-}
-
-# converts host ranges to actual host names
-sub get_hosts {
-    my ($hosts) = @_;
-    my @hosts;
-
-    my $int_re       = qr/ [0-9a-zA-Z] /xms;
-    my $range_re     = qr/ ($int_re) (?:[.][.]|-) ($int_re)/xms;
-    my $group_re     = qr/ (?: $int_re | $range_re )       /xms;
-    my $seperated_re = qr/ $group_re (?: , $group_re )  *  /xms;
-    my $num_range_re = qr/ [[{] ( $seperated_re ) [\]}]    /xms;
-
-    while ( my $host_range = shift @{$hosts} ) {
-        my ($num_range) = $host_range =~ /$num_range_re/;
-
-        if (!$num_range) {
-            push @hosts, $host_range;
-            next;
-            #if ( is_host($host_range) ) {
-            #    push @hosts, $host_range;
-            #    next;
-            #}
-            #else {
-            #    unshift @{$hosts}, $host_range;
-            #    last;
-            #}
-        }
-
-        my @numbs    = map { /$range_re/ ? ($1 .. $2) : ($_) } split /,/, $num_range;
-        my @hostmaps = map { $a=$host_range; $a =~ s/$num_range_re/$_/e; $a } @numbs;
-
-        if ( $hostmaps[0] =~ /$num_range_re/ ) {
-            push @{$option{host}}, @hostmaps;
-        }
-        else {
-            push @hosts, @hostmaps;
-        }
-    }
-
-    return @hosts;
-}
-
-sub is_host {
-    my $full_name = `host $_[0]`;
-    return $full_name;
-}
-
-sub shell_quote {
-    my ($text) = @_;
-
-    if ($text =~ /[\s$|><;#]/xms) {
-        $text =~ s/'/'\\''/gxms;
-        $text = "'$text'";
-    }
-
-    return $text;
 }
 
 __DATA__
