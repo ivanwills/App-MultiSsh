@@ -8,7 +8,6 @@ package App::MultiSsh;
 
 use strict;
 use warnings;
-use version;
 use Carp;
 use Scalar::Util;
 use List::Util;
@@ -18,7 +17,7 @@ use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 
 
-our $VERSION     = version->new('0.01');
+our $VERSION     = 0.01;
 our @EXPORT_OK   = qw//;
 our %EXPORT_TAGS = ();
 #our @EXPORT      = qw//;
