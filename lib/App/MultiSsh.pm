@@ -13,7 +13,7 @@ use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 
-our $VERSION     = 0.02;
+our $VERSION     = 0.03;
 our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote/;
 our %EXPORT_TAGS = ();
 
@@ -136,7 +136,7 @@ App::MultiSsh - Multi host ssh executer
 
 =head1 VERSION
 
-This documentation refers to App::MultiSsh version 0.02
+This documentation refers to App::MultiSsh version 0.03
 
 =head1 SYNOPSIS
 
