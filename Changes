@@ -1,5 +1,13 @@
 Revision history for App-MultiSsh
 
+0.02   2014-09-14
+        Updated manifest (Ivan Wills)
+        Updated tests (Ivan Wills)
+        Moved more functionality to the lib for better testing (Ivan Wills)
+        Removed functions moved to lib (Ivan Wills)
+        Moving some methods to lib and testing (Ivan Wills)
+        Updated changelog (Ivan Wills)
+
 0.01    2014-09-04
         Fixed boilerplate
         Fixed bad variable
