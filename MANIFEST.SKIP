@@ -90,3 +90,4 @@ tags
 # Other files of interest
 \..*\.tag$
 errors.err
+.travis.yml
