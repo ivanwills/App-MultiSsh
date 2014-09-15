@@ -1,5 +1,9 @@
 Revision history for App-MultiSsh
 
+0.04   2014-09-15
+        Added missing documentation (Ivan Wills)
+        Updated missing dependencies (Ivan Wills)
+
 0.03   2014-09-14
         Changed test to use the tests version of perl (Ivan Wills)
 
