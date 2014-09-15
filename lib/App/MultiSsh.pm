@@ -165,6 +165,10 @@ Gets the full name of C<$host>
 
 Quotes C<$text> for putting into a shell command
 
+=item C<multi_run ($hosts, $remote_cmd, $option)>
+
+Run the command on all hosts
+
 =back
 
 =head1 DIAGNOSTICS
