@@ -14,7 +14,7 @@ use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 
 our $VERSION     = 0.04;
-our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote/;
+our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote tmux/;
 our %EXPORT_TAGS = ();
 
 sub hosts_from_map {
@@ -124,6 +124,16 @@ sub multi_run {
 
     # reap any outstanding children
     wait;
+}
+
+sub tmux {
+    my (@commands) = @_;
+
+}
+
+sub layout {
+    my (@commands) = @_;
+    return [\@commands];
 }
 
 1;
