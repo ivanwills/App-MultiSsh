@@ -9,6 +9,7 @@ package App::MultiSsh;
 use strict;
 use warnings;
 use Carp;
+use POSIX qw/ceil/;
 use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use base qw/Exporter/;
@@ -133,7 +134,24 @@ sub tmux {
 
 sub layout {
     my (@commands) = @_;
-    return [\@commands];
+    my $rows = int sqrt @commands + 1;
+    my $cols = ceil @commands / $rows;
+    my $out = [];
+    if ( $cols > $rows + 1 ) {
+        my $tmp = $rows;
+        $rows++;
+        $cols--;
+    }
+    ROW:
+    for my $row ( 0 .. $rows - 1 ) {
+        for my $col ( 0 .. $cols - 1 ) {
+            last ROW if !@commands;
+            $out->[$row][$col] = shift @commands;
+        }
+    }
+    push @{ $out->[-1] }, shift @commands if @commands;
+
+    return $out;
 }
 
 1;

@@ -14,15 +14,48 @@ done_testing;
 sub test_layout {
     my @data = (
         [['cmd1']],
-        #[['cmd1', 'cmd2']],
-        #[
-        #    ['cmd1', 'cmd2'],
-        #    ['cmd3'],
-        #],
-        #[
-        #    ['cmd1', 'cmd2'],
-        #    ['cmd3', 'cmd4'],
-        #],
+        [['cmd1', 'cmd2']],
+        [
+            ['cmd1', 'cmd2'],
+            ['cmd3'],
+        ],
+        [
+            ['cmd1', 'cmd2'],
+            ['cmd3', 'cmd4'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3'],
+            ['cmd4', 'cmd5'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3'],
+            ['cmd4', 'cmd5', 'cmd6'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3'],
+            ['cmd4', 'cmd5', 'cmd6'],
+            ['cmd7'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3'],
+            ['cmd4', 'cmd5', 'cmd6'],
+            ['cmd7', 'cmd8'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3'],
+            ['cmd4', 'cmd5', 'cmd6'],
+            ['cmd7', 'cmd8', 'cmd9'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3', 'cmd4'],
+            ['cmd5', 'cmd6', 'cmd7', 'cmd8'],
+            ['cmd9', 'cmd10'],
+        ],
+        [
+            ['cmd1', 'cmd2', 'cmd3', 'cmd4'],
+            ['cmd5', 'cmd6', 'cmd7', 'cmd8'],
+            ['cmd9', 'cmd10', 'cmd11'],
+        ],
     );
 
     for my $no (0 .. $#data) {
