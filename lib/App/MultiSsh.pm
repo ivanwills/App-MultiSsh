@@ -77,6 +77,13 @@ sub shell_quote {
 sub multi_run {
     my ($hosts, $remote_cmd, $option) = @_;
 
+    if ($option->{tmux}) {
+        my @cmds = map {"ssh $_ " . shell_quote($remote_cmd)} @$hosts;
+        exec tmux(@cmds) if !$option->{test};
+        print tmux(@cmds) . "\n";
+        return;
+    }
+
     # store child processes if forking
     my @children;
 
@@ -130,6 +137,16 @@ sub multi_run {
 sub tmux {
     my (@commands) = @_;
 
+    my $layout  = layout(@commands);
+    my $tmux    = '';
+
+    for my $col (@commands) {
+        my $cmd = !$tmux   ? 'new-session' : '\\; split-window -d';
+
+        $tmux .= " $cmd " . shell_quote($col);
+    }
+
+    return "tmux$tmux \\; select-layout tiled";
 }
 
 sub layout {
@@ -149,7 +166,6 @@ sub layout {
             $out->[$row][$col] = shift @commands;
         }
     }
-    push @{ $out->[-1] }, shift @commands if @commands;
 
     return $out;
 }
@@ -196,6 +212,14 @@ Quotes C<$text> for putting into a shell command
 =item C<multi_run ($hosts, $remote_cmd, $option)>
 
 Run the command on all hosts
+
+=item C<tmux (@commands)>
+
+Generate a tmux session with all commands run in seppeate windows
+
+=item C<layout (@commands)>
+
+Generate a desired tmux layout
 
 =back
 

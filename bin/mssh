@@ -48,6 +48,7 @@ sub main {
         'parallel|p=i',
         'fork|f',
         'cssh|c=s',
+        'tmux|m',
         'interleave|i',
         'test|t!',
         'verbose|v+',
