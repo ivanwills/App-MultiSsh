@@ -69,15 +69,15 @@ sub test_layout {
 
 sub test_tmux {
     my @data = (
-        q{tmux new-session cmd1 \\; select-layout tiled},
-        q{tmux new-session cmd1 \\; split-window -d cmd2 \\; select-layout tiled},
-        q{tmux new-session cmd1 \\; split-window -d cmd2 \\; split-window -d cmd3 \\; select-layout tiled},
-        q{tmux new-session cmd1 \\; split-window -d cmd2 \\; split-window -d cmd3 \\; split-window -d cmd4 \\; select-layout tiled},
-        q{tmux new-session cmd1 \\; split-window -d cmd2 \\; split-window -d cmd3 \\; split-window -d cmd4 \\; split-window -d cmd5 \\; select-layout tiled},
+        q{tmux new-session 'cmd1 ' \\; select-layout tiled},
+        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; select-layout tiled},
+        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; split-window -d 'cmd3 ' \\; select-layout tiled},
+        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; split-window -d 'cmd3 ' \\; split-window -d 'cmd4 ' \\; select-layout tiled},
+        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; split-window -d 'cmd3 ' \\; split-window -d 'cmd4 ' \\; split-window -d 'cmd5 ' \\; select-layout tiled},
     );
 
     for my $no (0 .. $#data) {
-        my @test = map {'cmd' . ($_ + 1)} 0 .. $no;
+        my @test = map {'cmd' . ($_ + 1).' '} 0 .. $no;
         my $ans = App::MultiSsh::tmux(@test);
         is_deeply $ans, $data[$no], ($no + 1) . " setup correctly"
             or diag "$no\n", explain $ans, "\n", $data[$no];
