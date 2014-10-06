@@ -67,17 +67,17 @@ sub main {
     elsif ( $option{'help'} ) {
         pod2usage( -verbose => 1 );
     }
-    elsif ( !@ARGV && !( -x $option{cssh} ) ) {
+    elsif ( !@ARGV && !( -x $option{cssh} ) && !$option{tmux} ) {
         warn "You must specify a command or install or specify the location of cssh!\n";
         pod2usage( -verbose => 1 );
     }
 
-    if ( !@ARGV ) {
+    if ( !@ARGV && $option{cssh} ) {
         exec $option{cssh}, hosts_from_map($option{host});
     }
 
     # do stuff here
-    my $remote_cmd = pop @ARGV;
+    my $remote_cmd = pop @ARGV || '';
     #my $remote_cmd = join ' ', map {s{'}{'\\''}gxms; $_} @ARGV;
 
     if (@ARGV) {
