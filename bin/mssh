@@ -114,7 +114,7 @@ This documentation refers to mssh version 0.1.
    mssh [ --VERSION | --help | --man ]
    mssh [ -t | --test ] [ -v | --verbose ] -h host [-h host2 ..] 'remote command'
    mssh [ -t | --test ] [ -v | --verbose ] host [host2 ...] 'remote command'
-   mssh [ -t | --test ] [ -v | --verbose ] -h host [-h host2 ..]
+   mssh [ -t | --test ] [ -v | --verbose ] [-c|--cssh|-m|--tmux] -h host [-h host2 ..]
 
  OPTIONS:
   'remote command'
@@ -145,6 +145,11 @@ This documentation refers to mssh version 0.1.
   -i --interleave When running parallel commands interleave the output of each host
   -t --test       Just show all the commands that would be run don't actually
                   run anything
+  -f --fork       Fork the ssh processes so they run in parallel (output may
+                  not be legible)
+  -c --cssh[=]cmd
+                 Use cssh to connect
+  -m --tmux      Create a tmux session with each window pane running a host
 
   -v --verbose    Show more detailed option
      --VERSION    Prints the version information
