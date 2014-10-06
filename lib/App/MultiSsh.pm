@@ -137,14 +137,16 @@ sub multi_run {
 sub tmux {
     my (@commands) = @_;
 
-    my $layout  = layout(@commands);
-    my $tmux    = '';
+    my $layout = layout(@commands);
+    my $tmux   = '';
 
-    for my $col (@commands) {
+    for my $ssh (@commands) {
         my $cmd = !$tmux   ? 'new-session' : '\\; split-window -d';
 
-        $tmux .= " $cmd " . shell_quote($col);
+        $tmux .= " $cmd " . shell_quote($ssh);
     }
+
+    $tmux .= ' \\; set-window-option synchronize-panes on' if $commands[0] !~ /\s$/xms;
 
     return "tmux$tmux \\; select-layout tiled";
 }
