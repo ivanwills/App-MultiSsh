@@ -38,8 +38,10 @@ exit 0;
 
 sub main {
 
-    $option{cssh} = `which cssh`;
-    chomp $option{cssh};
+    $option{cssh_cmd} = `which cssh`;
+    chomp $option{cssh_cmd};
+    $option{tmux_cmd} = `which tmux`;
+    chomp $option{tmux_cmd};
 
     Getopt::Long::Configure('bundling');
     GetOptions(
@@ -47,8 +49,10 @@ sub main {
         'host|h=s@',
         'parallel|p=i',
         'fork|f',
-        'cssh|c=s',
+        'cssh|c',
         'tmux|m',
+        'cssh_cmd=s',
+        'tmux_cmd=s',
         'interleave|i',
         'test|t!',
         'verbose|v+',
@@ -67,9 +71,16 @@ sub main {
     elsif ( $option{'help'} ) {
         pod2usage( -verbose => 1 );
     }
-    elsif ( !@ARGV && !( -x $option{cssh} ) && !$option{tmux} ) {
-        warn "You must specify a command or install or specify the location of cssh!\n";
+    elsif ( !@ARGV && !( -x $option{cssh_cmd} || -x $option{tmux_cmd} ) ) {
+        warn "You must specify a command or install or specify the location of cssh or tmux!\n";
         pod2usage( -verbose => 1 );
+    }
+
+    # no command and not specified cssh or tmux
+    if ( !@ARGV && !($option{cssh} || $option{tmux}) ) {
+        # pick cssh or tmux
+        $option{cssh} = !!$option{cssh_cmd};
+        $option{tmux} = !!$option{tmux_cmd};
     }
 
     if ( !@ARGV && $option{cssh} ) {
@@ -126,7 +137,7 @@ This documentation refers to mssh version 0.1.
                   seperated integer/letters or .. for a range of all values
                   from the first to last. Note if clusterssh (cssh) is
                   installed and no 'remote command' specified C<cssh> will
-                  be run
+                  be run, similarly if tmux is installed.
                   EG [0..5] for 1,2,3,4 and 5
                      [0,5]      1 and 5
                      [0..3,5]   1,2,3 and 5
@@ -147,9 +158,12 @@ This documentation refers to mssh version 0.1.
                   run anything
   -f --fork       Fork the ssh processes so they run in parallel (output may
                   not be legible)
-  -c --cssh[=]cmd
-                 Use cssh to connect
-  -m --tmux      Create a tmux session with each window pane running a host
+  -c --cssh       Use cssh to run the ssh commands
+     --cssh-cmd[=]str
+                  Use str as the C<cssh> program (defaults to cssh found in $PATH)
+  -m --tmux       Create a tmux session with each window pane connecting to a host
+     --tmux-cmd[=]str
+                  Use str as the C<tmux> program (defaults to tmux found in $PATH)
 
   -v --verbose    Show more detailed option
      --VERSION    Prints the version information
