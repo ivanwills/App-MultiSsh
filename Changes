@@ -1,5 +1,24 @@
 Revision history for App-MultiSsh
 
+0.10   2015-01-03
+        Updating for release of version 0.10
+        Changed dependency of Path::Class to Path::Tiny, stopped shelling out to which (Ivan Wills)
+        Updated LICENSE details (Ivan Wills)
+        Improving tmux support and documentation (Ivan Wills)
+        Fixed test work with synch rules (Ivan Wills)
+        Added synchronising pages only when a command is being run (Ivan Wills)
+        Fixed not running with --tmux option (Ivan Wills)
+        Added missing command documentation (Ivan Wills)
+        Cleaned up test (Ivan Wills)
+        Deleted file as "^B :setw synchronize-panes" does the trick (Ivan Wills)
+        Control script for tmux (Ivan Wills)
+        Got tmux working (Ivan Wills)
+        Created test to build layout (Ivan Wills)
+        Working on tmux layout (Ivan Wills)
+        Updating for release of version 0.04 (Ivan Wills)
+        Added missing documentation (Ivan Wills)
+        Updated missing dependencies (Ivan Wills)
+
 0.04   2014-09-15
         Added missing documentation (Ivan Wills)
         Updated missing dependencies (Ivan Wills)
