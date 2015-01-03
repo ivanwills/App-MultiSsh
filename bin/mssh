@@ -14,7 +14,7 @@ use Pod::Usage;
 use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use FindBin qw/$Bin/;
-use Path::Class;
+use Path::Tiny;
 use POSIX ":sys_wait_h";
 use App::MultiSsh qw/hosts_from_map is_host multi_run shell_quote/;
 
@@ -38,10 +38,8 @@ exit 0;
 
 sub main {
 
-    $option{cssh_cmd} = `which cssh`;
-    chomp $option{cssh_cmd};
-    $option{tmux_cmd} = `which tmux`;
-    chomp $option{tmux_cmd};
+    $option{cssh_cmd} = which('cssh');
+    $option{tmux_cmd} = which('tmux');
 
     Getopt::Long::Configure('bundling');
     GetOptions(
@@ -106,6 +104,17 @@ sub main {
     return if $remote_cmd eq '-';
 
     multi_run(\@hosts, $remote_cmd, \%option);
+
+    return;
+}
+
+sub which {
+    my ($cmd) = @_;
+
+    for my $path (split /:/, $ENV{PATH}) {
+        next if !-d $path || !-x path($path, $cmd);
+        return path($path, $cmd);
+    }
 
     return;
 }

@@ -8,9 +8,9 @@ my $builder = Module::Build->new(
     dist_author       => 'Ivan Wills <ivan.wills@gmail.com>',
     dist_version_from => 'lib/App/MultiSsh.pm',
     requires          => {
-        'perl'        => '5.008',
-        'Path::Class' => 0,
-        'version'     => 0,
+        'perl'       => '5.008',
+        'Path::Tiny' => 0,
+        'version'    => 0,
     },
     build_requires => {
         'Test::More'       => 0,
