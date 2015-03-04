@@ -48,8 +48,8 @@ sub main {
         'fork|f',
         'cssh|c',
         'tmux|m',
-        'cssh_cmd=s',
-        'tmux_cmd=s',
+        'cssh_cmd|C=s',
+        'tmux_cmd|T=s',
         'interleave|i',
         'test|t!',
         'verbose|v+',
@@ -112,7 +112,7 @@ sub which {
 
     for my $path (split /:/, $ENV{PATH}) {
         next if !-d $path || !-x path($path, $cmd);
-        return path($path, $cmd);
+        return '' . path($path, $cmd);
     }
 
     return;
