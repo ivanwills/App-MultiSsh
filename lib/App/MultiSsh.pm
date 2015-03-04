@@ -141,7 +141,7 @@ sub tmux {
     my $tmux   = '';
 
     for my $ssh (@commands) {
-        my $cmd = !$tmux   ? 'new-session' : '\\; split-window -d';
+        my $cmd = !$tmux ? 'new-session' : '\\; split-window -d';
 
         $tmux .= " $cmd " . shell_quote($ssh);
     }
