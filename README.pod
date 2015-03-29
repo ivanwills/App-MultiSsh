@@ -1,8 +1,13 @@
-App-MultiSsh
+=begin html
 
-Run ssh commands to multiple servers at once with the mssh command.
+<a href="https://travis-ci.org/ivanwills/App-MultiSsh?branch=master"><img src="https://travis-ci.org/ivanwills/App-MultiSsh.png?branch=master" alt="App-MultiSsh"></a>
+<a href="https://coveralls.io/r/ivanwills/App-MultiSsh?branch=master"><img src="https://coveralls.io/repos/ivanwills/App-MultiSsh/badge.svg?branch=master" alt="Coverage Status" /></a>
 
-INSTALLATION
+=head1 App-MultiSsh
+
+Run ssh commands to multiple servers at once with the C<mssh> command.
+
+=head1 INSTALLATION
 
 To install this module, run the following commands:
 
@@ -11,7 +16,7 @@ To install this module, run the following commands:
     ./Build test
     ./Build install
 
-SUPPORT AND DOCUMENTATION
+=head1 SUPPORT AND DOCUMENTATION
 
 After installing, you can find documentation for this module with the
 perldoc command.
@@ -35,7 +40,7 @@ You can also look for information at:
     Source Code
         git://github.com/ivanwills/App-MultiSsh.git
 
-COPYRIGHT AND LICENCE
+=head1 COPYRIGHT AND LICENCE
 
 Copyright (C) 2014 Ivan Wills
 
@@ -45,3 +50,4 @@ by the Free Software Foundation; or the Artistic License.
 
 See http://dev.perl.org/licenses/ for more information.
 
+=cut
