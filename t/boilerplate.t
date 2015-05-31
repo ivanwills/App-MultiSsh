@@ -2,8 +2,8 @@
 
 use strict;
 use warnings;
-use Test::More tests => 4 + 1;
-use Test::NoWarnings;
+use Test::More;
+use Test::Warnings;
 
 sub not_in_file_ok {
     my ($filename, %regex) = @_;
@@ -58,5 +58,7 @@ subtest 'Changes' => sub {
     );
 };
 
+module_boilerplate_ok('bin/mscp');
 module_boilerplate_ok('bin/mssh');
 module_boilerplate_ok('lib/App/MultiSsh.pm');
+done_testing();
