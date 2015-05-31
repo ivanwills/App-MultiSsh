@@ -217,7 +217,7 @@ Run the command on all hosts
 
 =item C<tmux (@commands)>
 
-Generate a tmux session with all commands run in seppeate windows
+Generate a tmux session with all commands run in separate windows
 
 =item C<layout (@commands)>
 

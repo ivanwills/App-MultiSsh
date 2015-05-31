@@ -31,5 +31,7 @@ add_stopwords(qw/
     Param
     ssh
     mssh
+    tmux
+    mscp
 /);
 all_pod_files_spelling_ok();
