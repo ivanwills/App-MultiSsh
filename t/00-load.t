@@ -2,13 +2,16 @@
 
 use strict;
 use warnings;
-
-use Test::More tests => 2 + 1;
-use Test::NoWarnings;
+use Test::More;
+use Test::Warnings;
 use File::Spec;
 
-use_ok( 'App::MultiSsh' );
+BEGIN {
+    use_ok( 'App::MultiSsh' );
+}
+
 diag my $perl = File::Spec->rel2abs($^X);
 ok !(system $perl, qw{ -Ilib -c bin/mssh}), "bin/mssh compiles";
 
 diag( "Testing App::MultiSsh $App::MultiSsh::VERSION, Perl $], $^X" );
+done_testing();
