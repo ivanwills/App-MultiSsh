@@ -4,8 +4,8 @@ BEGIN { $ENV{TESTING} = 1 }
 
 use strict;
 use warnings;
-use Test::More tests => 12 + 1;
-use Test::NoWarnings;
+use Test::More;
+use Test::Warnings;
 use Data::Dumper qw/Dumper/;
 
 use App::MultiSsh qw/hosts_from_map/;
@@ -14,6 +14,8 @@ for my $data (good_data()) {
     is_deeply [hosts_from_map([$data->[0]])], $data->[1], "$data->[0] expands correctly"
         or diag Dumper [hosts_from_map([$data->[0]])], $data->[1];
 }
+
+done_testing();
 
 sub good_data {
     return (

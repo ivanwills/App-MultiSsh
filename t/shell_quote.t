@@ -4,14 +4,16 @@ BEGIN { $ENV{TESTING} = 1 }
 
 use strict;
 use warnings;
-use Test::More tests => 8 + 1;
-use Test::NoWarnings;
+use Test::More;
+use Test::Warnings;
 
 use App::MultiSsh qw/shell_quote/;
 
 for my $data (data()) {
     is shell_quote($data->[0]), $data->[1], "$data->[0] translates to $data->[1]";
 }
+
+done_testing();
 
 sub data {
     return (
