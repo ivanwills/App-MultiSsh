@@ -1,5 +1,23 @@
 Revision history for App-MultiSsh
 
+0.11   2015-06-01
+        Updating for release of version 0.11
+        Switched from Test::NoWarnings to Test::Warnings (Ivan Wills)
+        Switched from Test::NoWarnings to Test::Warnings (Ivan Wills)
+        Fixed load test (Ivan Wills)
+        Fixed LICENSE (Ivan Wills)
+        Fixed spelling (Ivan Wills)
+        Fixed boilerplate test (Ivan Wills)
+        Removed unneeded tag (Ivan Wills)
+        Added specific Test::More version for the features being used (Ivan Wills)
+        Updated manifest (Ivan Wills)
+        Fixed POD, added build/coverage badges (Ivan Wills)
+        Coverted README to POD (Ivan Wills)
+        New command for sending file(s) to multiple servers (Ivan Wills)
+        Added config for coveralls.io (Ivan Wills)
+        Fixed whitespace (Ivan Wills)
+        Fixed issue with getopt long syntax (Ivan Wills)
+
 0.10   2015-01-03
         Updating for release of version 0.10
         Changed dependency of Path::Class to Path::Tiny, stopped shelling out to which (Ivan Wills)
