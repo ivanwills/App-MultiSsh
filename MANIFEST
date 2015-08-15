@@ -4,7 +4,6 @@ Build.PL
 Changes
 lib/App/MultiSsh.pm
 LICENSE
-Makefile.PL
 MANIFEST
 META.json
 META.yml
