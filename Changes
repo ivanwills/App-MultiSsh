@@ -1,5 +1,10 @@
 Revision history for App-MultiSsh
 
+0.12   2015-08-15
+        Updating for release of version 0.12
+        Removed creation of makefile (Ivan Wills)
+        Added Perl 5.22 to list of perl versions to build with (Ivan Wills)
+
 0.11   2015-06-01
         Updating for release of version 0.11
         Switched from Test::NoWarnings to Test::Warnings (Ivan Wills)
