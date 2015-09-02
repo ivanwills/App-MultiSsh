@@ -73,6 +73,12 @@ sub main {
         pod2usage( -verbose => 1 );
     }
 
+
+    if ($option{fork}) {
+        $option{parallel}   ||= 4;
+        $option{interleave} //= 1;
+    }
+
     # no command and not specified cssh or tmux
     if ( !@ARGV && !($option{cssh} || $option{tmux}) ) {
         # pick cssh or tmux
@@ -168,8 +174,8 @@ This documentation refers to mssh version 0.12.
                 Turn off --fork interleaving of output (the default)
   -t --test     Just show all the commands that would be run don't actually
                 run anything
-  -f --fork     Fork the ssh processes so they run in parallel (output may
-                not be legible)
+  -f --fork     Fork the ssh processes so they run in parallel, output may
+                not be legible. (Equivalent of --parallel=4 --interleave)
   -c --cssh     Use cssh to run the ssh commands
      --cssh-cmd[=]str
                 Use str as the C<cssh> program (defaults to cssh found in $PATH)
