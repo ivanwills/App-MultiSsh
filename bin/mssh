@@ -50,7 +50,7 @@ sub main {
         'tmux|m',
         'cssh_cmd|C=s',
         'tmux_cmd|T=s',
-        'interleave|i',
+        'interleave|i!',
         'test|t!',
         'verbose|v+',
         'man',
@@ -137,46 +137,50 @@ This documentation refers to mssh version 0.12.
 
  OPTIONS:
   'remote command'
-                  The command to execute on the remote hosts.
-  host            See --host, only use if specifying a remote command
+                The command to execute on the remote hosts.
+  host          See --host, only use if specifying a remote command
 
-  -h --host[=]str Host or range of hosts to execute 'remote command' on
-                  The range must be sourounded by [] and can be either comma
-                  seperated integer/letters or .. for a range of all values
-                  from the first to last. Note if clusterssh (cssh) is
-                  installed and no 'remote command' specified C<cssh> will
-                  be run, similarly if tmux is installed.
-                  EG [0..5] for 1,2,3,4 and 5
-                     [0,5]      1 and 5
-                     [0..3,5]   1,2,3 and 5
-                     [0-5]      1,2,3,4 and 5
-                     [0-3,5]    1,2,3 and 5
-                     {0..5} for 1,2,3,4 and 5
-                     {0,5}      1 and 5
-                     {0..3,5}   1,2,3 and 5
-                     {0-5}      1,2,3,4 and 5
-                     {0-3,5}    1,2,3 and 5
+  -h --host[=]str
+                Host or range of hosts to execute 'remote command' on
+                The range must be sourounded by [] and can be either comma
+                seperated integer/letters or .. for a range of all values
+                from the first to last. Note if clusterssh (cssh) is
+                installed and no 'remote command' specified C<cssh> will
+                be run, similarly if tmux is installed.
+                EG [0..5] for 1,2,3,4 and 5
+                   [0,5]      1 and 5
+                   [0..3,5]   1,2,3 and 5
+                   [0-5]      1,2,3,4 and 5
+                   [0-3,5]    1,2,3 and 5
+                   {0..5} for 1,2,3,4 and 5
+                   {0,5}      1 and 5
+                   {0..3,5}   1,2,3 and 5
+                   {0-5}      1,2,3,4 and 5
+                   {0-3,5}    1,2,3 and 5
   -p --parallel[=]int
-                  Fork calls to each server to run in parallel the value limits
-                  the number of processes called at once.
-                  Note without --interleave you wont see results until the each
-                  server has completed so that results are groupped.
-  -i --interleave When running parallel commands interleave the output of each host
-  -t --test       Just show all the commands that would be run don't actually
-                  run anything
-  -f --fork       Fork the ssh processes so they run in parallel (output may
-                  not be legible)
-  -c --cssh       Use cssh to run the ssh commands
+                Fork calls to each server to run in parallel the value limits
+                the number of processes called at once.
+                Note without --interleave you wont see results until the each
+                server has completed so that results are groupped.
+  -i --interleave
+                When running parallel commands interleave the output of each host
+     --no-interleave
+                Turn off --fork interleaving of output (the default)
+  -t --test     Just show all the commands that would be run don't actually
+                run anything
+  -f --fork     Fork the ssh processes so they run in parallel (output may
+                not be legible)
+  -c --cssh     Use cssh to run the ssh commands
      --cssh-cmd[=]str
-                  Use str as the C<cssh> program (defaults to cssh found in $PATH)
-  -m --tmux       Create a tmux session with each window pane connecting to a host
+                Use str as the C<cssh> program (defaults to cssh found in $PATH)
+  -m --tmux     Create a tmux session with each window pane connecting to a host
      --tmux-cmd[=]str
-                  Use str as the C<tmux> program (defaults to tmux found in $PATH)
+                Use str as the C<tmux> program (defaults to tmux found in $PATH)
 
-  -v --verbose    Show more detailed option
-     --VERSION    Prints the version information
-     --help       Prints this help information
-     --man        Prints the full documentation for mssh
+  -v --verbose  Show more detailed option
+     --VERSION  Prints the version information
+     --help     Prints this help information
+     --man      Prints the full documentation for mssh
 
 =head1 DESCRIPTION
 
