@@ -68,7 +68,13 @@ sub main {
     elsif ( $option{'help'} ) {
         pod2usage( -verbose => 1 );
     }
-    elsif ( !@ARGV && !( -x $option{cssh_cmd} || -x $option{tmux_cmd} ) ) {
+    elsif (
+        !@ARGV &&
+        !(
+            ( $option{cssh_cmd} && -x $option{cssh_cmd} ) ||
+            ( $option{tmux_cmd} && -x $option{tmux_cmd} )
+        )
+    ) {
         warn "You must specify a command or install or specify the location of cssh or tmux!\n";
         pod2usage( -verbose => 1 );
     }
