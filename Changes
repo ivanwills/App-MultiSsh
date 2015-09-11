@@ -1,5 +1,12 @@
 Revision history for App-MultiSsh
 
+0.13   2015-09-11
+        Updating for release of version 0.13
+        Upped the mnimum perl version to match features used (Ivan Wills)
+        Fixed warning about uninitialised (Ivan Wills)
+        Implemented --fork (Ivan Wills)
+        Cleaned up help (Ivan Wills)
+
 0.12   2015-08-15
         Updating for release of version 0.12
         Removed creation of makefile (Ivan Wills)
