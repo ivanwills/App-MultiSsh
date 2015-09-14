@@ -78,7 +78,7 @@ mscp - Multi host scp (send to multiple hosts only)
 
 =head1 VERSION
 
-This documentation refers to mscp version 0.0.1
+This documentation refers to mscp version 0.13.
 
 =head1 SYNOPSIS
 
