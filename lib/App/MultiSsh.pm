@@ -203,6 +203,11 @@ This documentation refers to App::MultiSsh version 0.13
 
 Splits C<$host> into all hosts that it represents.
 
+eg
+
+  host0[012] -> host00, host01, host02
+  host0[0-2] -> host00, host01, host02
+
 =item C<is_host ($host)>
 
 Gets the full name of C<$host>
