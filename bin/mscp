@@ -74,7 +74,7 @@ __DATA__
 
 =head1 NAME
 
-mscp - Multi host scp (send to multiple hosts only)
+mscp - Multi host scp (send files to multiple hosts only)
 
 =head1 VERSION
 
