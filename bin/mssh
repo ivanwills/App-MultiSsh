@@ -44,6 +44,7 @@ sub main {
     GetOptions(
         \%option,
         'host|h=s@',
+        'group|g=s@',
         'parallel|p=i',
         'fork|f',
         'cssh|c',
@@ -90,6 +91,11 @@ sub main {
         # pick cssh or tmux
         $option{cssh} = !!$option{cssh_cmd};
         $option{tmux} = !!$option{tmux_cmd};
+    }
+
+    # add any group hosts to the current hosts
+    if ($option{group}) {
+        push @{ $option{host} }, App::MultiSsh::get_groups($option{group});
     }
 
     if ( !@ARGV && $option{cssh} ) {
