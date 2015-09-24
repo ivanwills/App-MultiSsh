@@ -8,11 +8,13 @@ package App::MultiSsh;
 
 use strict;
 use warnings;
+use feature qw/:5.10/;
 use Carp;
 use POSIX qw/ceil/;
 use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use base qw/Exporter/;
+use Path::Tiny;
 
 our $VERSION     = '0.13';
 our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote tmux/;
@@ -170,6 +172,46 @@ sub layout {
     }
 
     return $out;
+}
+
+sub config {
+    state $config;
+    return $config if $config;
+
+    my $config_file = path($ENV{HOME}, '.mssh');
+    if (!-f $config_file) {
+        $config = {};
+
+        # create a default config file
+        $config_file->spew("---\ngroups:\n");
+
+        return $config;
+    }
+
+    require YAML;
+    $config = YAML::LoadFile($config_file);
+
+    return $config;
+}
+
+sub get_groups {
+    my ($groups) = @_;
+    my $config = config();
+    my @hosts;
+
+    for my $group (@$groups) {
+        if ($config->{groups} && $config->{groups}{$group}) {
+            push @hosts,
+                ref $config->{groups}{$group}
+                ? @{ $config->{groups}{$group} }
+                : $config->{groups}{$group};
+        }
+        else {
+            warn "No host group '$group' defined in the config!\n";
+        }
+    }
+
+    return @hosts;
 }
 
 1;
