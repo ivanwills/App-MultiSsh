@@ -175,6 +175,9 @@ This documentation refers to mssh version 0.13.
                    {0..3,5}   1,2,3 and 5
                    {0-5}      1,2,3,4 and 5
                    {0-3,5}    1,2,3 and 5
+  -g --group[=]name
+                Specify a host name group from your ~/.mssh file. (see --man
+                for more details)
   -p --parallel[=]int
                 Fork calls to each server to run in parallel the value limits
                 the number of processes called at once.
@@ -201,6 +204,20 @@ This documentation refers to mssh version 0.13.
      --man      Prints the full documentation for mssh
 
 =head1 DESCRIPTION
+
+=head2 Groups
+
+You can configure host name groups in ~/.mssh (a YAML formatted file)
+
+    ---
+    groups:
+        prod: myhost0[1-9].prod
+        dev:
+            - myhost0[1-4].dev
+            - myhost0[1-4].test
+
+This can save some effort with commonly used groups of hosts. The argument
+I<--group> adds any configured hosts to any specified host names.
 
 =head1 SUBROUTINES/METHODS
 
