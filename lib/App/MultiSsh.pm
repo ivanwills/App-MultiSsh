@@ -270,6 +270,14 @@ Generate a tmux session with all commands run in separate windows
 
 Generate a desired tmux layout
 
+=item C<config ()>
+
+Read the ~/.mssh config file and return it's data
+
+=item C<get_groups (@groups)>
+
+Return all hosts represented in C<@groups>
+
 =back
 
 =head1 DIAGNOSTICS
