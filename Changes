@@ -1,5 +1,16 @@
 Revision history for App-MultiSsh
 
+0.14   2015-09-27
+        Updating for release of version 0.14
+        Added documentation (Ivan Wills)
+        Added documentation about --groups (Ivan Wills)
+        New dependency added (Ivan Wills)
+        Added option to specify a list of groups from the config file (Ivan Wills)
+        Added 2 new functions config (which gets config from ~/.mssh) and get_groups which returns a list of hosts from a list of groups (Ivan Wills)
+        Fixed description of mscp (Ivan Wills)
+        More documentation (Ivan Wills)
+        Fixed version number (Ivan Wills)
+
 0.13   2015-09-11
         Updating for release of version 0.13
         Upped the mnimum perl version to match features used (Ivan Wills)
