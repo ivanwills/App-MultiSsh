@@ -32,7 +32,10 @@ sub main {
     Getopt::Long::Configure('bundling');
     GetOptions(
         \%option,
+        'host|h=s@',
+        'group|g=s@',
         'recurse|r=s',
+        'test|t!',
         'verbose|v+',
         'man',
         'help',
@@ -54,17 +57,22 @@ sub main {
     }
 
     # do stuff here
+    if ($option{group}) {
+        push @{ $option{host} }, App::MultiSsh::get_groups($option{group});
+    }
+    elsif (!$option{host}) {
+        (undef, $option{host}) = $ARGV[-1] =~ s/^( [^@]+ [@])? ( [^:]+ ) : //xms;
+    }
+
     my $dest = pop @ARGV;
-    my (undef, $host_map) = $dest =~ s/^( [^@]+ [@])? ( [^:]+ ) : /$1{host}:/xms;
-    my @hosts = hosts_from_map($host_map);
+    my @hosts = hosts_from_map($option{host});
     my @cmd   = qw/scp/;
 
     push @cmd, qw/-r/ if $option{recurse};
 
     for my $host (@hosts) {
-        my $destination = $dest;
-        $destination =~ s/[{] host [}]/$host/xms;
-        system @cmd, @ARGV, $destination;
+        print join ' ', @cmd, @ARGV, "$host:$dest\n" if $option{verbose} || $option{test};
+        system @cmd, @ARGV, "$host:$dest" if !$option{test};
     }
 
     return;
