@@ -1,5 +1,9 @@
 Revision history for App-MultiSsh
 
+0.15   2015-10-04
+        Updating for release of version 0.15
+        Improving how mscp works so it can use groups (Ivan Wills)
+
 0.14   2015-09-27
         Updating for release of version 0.14
         Added documentation (Ivan Wills)
