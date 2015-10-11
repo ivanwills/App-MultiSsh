@@ -107,7 +107,7 @@ sub main {
     }
 
     if ( !@ARGV && $option{cssh} ) {
-        exec $option{cssh}, hosts_from_map($option{host});
+        exec $option{cssh_cmd}, hosts_from_map($option{host});
     }
 
     # do stuff here
