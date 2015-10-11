@@ -49,8 +49,8 @@ sub main {
         'fork|f',
         'cssh|c',
         'tmux|m',
-        'cssh_cmd|C=s',
-        'tmux_cmd|T=s',
+        'cssh_cmd|cssh-cmd|C=s',
+        'tmux_cmd|tmux-cmd|T=s',
         'interleave|i!',
         'test|t!',
         'verbose|v+',
@@ -77,6 +77,14 @@ sub main {
         )
     ) {
         warn "You must specify a command or install or specify the location of cssh or tmux!\n";
+        pod2usage( -verbose => 1 );
+    }
+    elsif ( !@ARGV && $option{cssh} && !$option{cssh_cmd} ) {
+        warn "Cannot find cssh use --cssh-cmd to specify it's location!\n";
+        pod2usage( -verbose => 1 );
+    }
+    elsif ( !@ARGV && $option{tmux} && !$option{tmux_cmd} ) {
+        warn "Cannot find tmux use --tmux-cmd to specify it's location!\n";
         pod2usage( -verbose => 1 );
     }
 
