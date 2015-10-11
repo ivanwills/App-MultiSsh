@@ -16,7 +16,7 @@ use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 use Path::Tiny;
 
-our $VERSION     = '0.15';
+our $VERSION     = '0.16';
 our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote tmux/;
 our %EXPORT_TAGS = ();
 
@@ -224,7 +224,7 @@ App::MultiSsh - Multi host ssh executer
 
 =head1 VERSION
 
-This documentation refers to App::MultiSsh version 0.15
+This documentation refers to App::MultiSsh version 0.16
 
 =head1 SYNOPSIS
 
