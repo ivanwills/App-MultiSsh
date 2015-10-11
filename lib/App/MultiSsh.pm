@@ -150,7 +150,7 @@ sub tmux {
 
     $tmux .= ' \\; set-window-option synchronize-panes on' if $commands[0] !~ /\s$/xms;
 
-    return "tmux$tmux \\; select-layout tiled";
+    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes";
 }
 
 sub layout {
