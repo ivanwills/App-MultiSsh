@@ -52,7 +52,7 @@ sub main {
     elsif ( $option{'help'} ) {
         pod2usage( -verbose => 1 );
     }
-    elsif ( @ARGV >= 2 ) {
+    elsif ( @ARGV < 2 ) {
         pod2usage( -verbose => 1 );
     }
 
@@ -90,11 +90,12 @@ This documentation refers to mscp version 0.15.
 
 =head1 SYNOPSIS
 
-   mscp [option] src (src2 ...) [user@]host:dest
+   mscp [option] src (src2 ...) (--host|-h) [user@]host (--host host2...) dest
 
  OPTIONS:
   src           Source file(s)
-  dest          Destination file or directory
+  dest          Destination file or directory (if more than one source file
+                then dest must be a directory as per usual scp rules)
   -r --recurse  Recurse into subdirectories
 
   -v --verbose  Show more detailed option
@@ -105,6 +106,22 @@ This documentation refers to mscp version 0.15.
 =head1 DESCRIPTION
 
 The C<mscp> command allows copying files to multiple hosts at once.
+
+=head2 Examples
+
+ # copy ~/.bashrc to servers test01, test02, test03 and test04
+ mscp -h test0[1-4] ~/.bashrc .
+ # equivalent scp commands
+ scp ~/.bashrc test01:.
+ scp ~/.bashrc test02:.
+ scp ~/.bashrc test03:.
+ scp ~/.bashrc test04:.
+
+ # copy the data directory in the current directory to remote /opt/data directories
+ mscp -r -h test0[1,2] data /opt/data
+ # equivalent scp commands
+ scp -r data test01:/opt/data
+ scp -r data test02:/opt/data
 
 =head1 SUBROUTINES/METHODS
 
