@@ -15,6 +15,8 @@ use Data::Dumper qw/Dumper/;
 use English qw/ -no_match_vars /;
 use base qw/Exporter/;
 use Path::Tiny;
+use IO::Handle;
+use POSIX qw/:errno_h/;
 
 our $VERSION     = '0.16';
 our @EXPORT_OK   = qw/hosts_from_map is_host multi_run shell_quote tmux/;
@@ -113,6 +115,18 @@ sub multi_run {
             elsif ( defined $child ) {
                 # child code
                 if ( $option->{interleave} ) {
+                    require IPC::Open3::Callback;
+                    my ($pid, $in, $out, $err) = IPC::Open3::Callback::safe_open3($cmd);
+
+                    close $in;
+                    $out->blocking(0);
+                    $err->blocking(0);
+                    while ($out && $err) {
+                        $out = _read_label_line($out, \*STDOUT, $host);
+                        $err = _read_label_line($err, \*STDERR, $host);
+                    }
+                    waitpid $pid, 0;
+                    exit 0;
                     exec "$cmd 2>&1";
                 }
                 else {
@@ -135,6 +149,25 @@ sub multi_run {
     # reap any outstanding children
     wait;
 }
+
+sub _read_label_line {
+    my ($in_fh, $out_fh, $host) = @_;
+    return if !$in_fh;
+
+    my $line = <$in_fh>;
+
+    if ( !defined $line && $! != EAGAIN ) {
+        close $in_fh;
+        return;
+    }
+
+    if (defined $line) {
+        print {$out_fh} "[$host] " . $line;
+    }
+
+    return $in_fh;
+}
+
 
 sub tmux {
     my (@commands) = @_;
