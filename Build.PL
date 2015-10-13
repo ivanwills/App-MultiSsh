@@ -8,10 +8,11 @@ my $builder = Module::Build->new(
     dist_author       => 'Ivan Wills <ivan.wills@gmail.com>',
     dist_version_from => 'lib/App/MultiSsh.pm',
     requires          => {
-        'perl'       => '5.010',
-        'Path::Tiny' => 0,
-        'YAML'       => 0,
-        'version'    => 0,
+        'perl'                 => '5.010',
+        'IPC::Open3::Callback' => 0,
+        'Path::Tiny'           => 0,
+        'YAML'                 => 0,
+        'version'              => 0,
     },
     build_requires => {
         'Test::More'     => '0.88',
