@@ -127,7 +127,6 @@ sub multi_run {
                     }
                     waitpid $pid, 0;
                     exit 0;
-                    exec "$cmd 2>&1";
                 }
                 else {
                     my $out = `$cmd 2>&1`;
