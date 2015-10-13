@@ -151,6 +151,15 @@ sub multi_run {
 
 sub _read_label_line {
     my ($in_fh, $out_fh, $host) = @_;
+    state %hosts;
+    my @colours = (qw/
+        red     on_red     bright_red
+        green   on_green   bright_green
+        blue    on_blue    bright_blue
+        magenta on_magenta bright_magenta
+        cyan    on_cyan
+        yellow  on_yellow
+    /);
     return if !$in_fh;
 
     my $line = <$in_fh>;
@@ -161,12 +170,13 @@ sub _read_label_line {
     }
 
     if (defined $line) {
-        print {$out_fh} "[$host] " . $line;
+        $hosts{$host} ||= $colours[rand @colours];
+        require Term::ANSIColor;
+        print {$out_fh} '[', Term::ANSIColor::colored($host, $hosts{$host}), '] ', $line;
     }
 
     return $in_fh;
 }
-
 
 sub tmux {
     my (@commands) = @_;
