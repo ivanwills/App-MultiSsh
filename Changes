@@ -1,5 +1,14 @@
 Revision history for App-MultiSsh
 
+0.17   2015-10-14
+        Updating for release of version 0.17
+        Removed interleaving from todo (Ivan Wills)
+        Added colouring host prefix (Ivan Wills)
+        Removed old exec (Ivan Wills)
+        Added new dependency (Ivan Wills)
+        Added prefixing interleaved lines with the host it's from (Ivan Wills)
+        Added a list of things todo (Ivan Wills)
+
 0.16   2015-10-11
         Updating for release of version 0.16
         Fixed clusterssh command support (Ivan Wills)
