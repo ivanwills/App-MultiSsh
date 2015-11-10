@@ -183,9 +183,10 @@ sub tmux {
 
     my $layout = layout(@commands);
     my $tmux   = '';
+    my $pct    = int( 100 / scalar @commands );
 
     for my $ssh (@commands) {
-        my $cmd = !$tmux ? 'new-session' : '\\; split-window -d';
+        my $cmd = !$tmux ? 'new-session' : '\\; split-window -d -p ' . $pct;
 
         $tmux .= " $cmd " . shell_quote($ssh);
     }
