@@ -70,10 +70,10 @@ sub test_layout {
 sub test_tmux {
     my @data = (
         q{tmux new-session 'cmd1 ' \\; select-layout tiled \\; setw synchronize-panes},
-        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; select-layout tiled \\; setw synchronize-panes},
-        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; split-window -d 'cmd3 ' \\; select-layout tiled \\; setw synchronize-panes},
-        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; split-window -d 'cmd3 ' \\; split-window -d 'cmd4 ' \\; select-layout tiled \\; setw synchronize-panes},
-        q{tmux new-session 'cmd1 ' \\; split-window -d 'cmd2 ' \\; split-window -d 'cmd3 ' \\; split-window -d 'cmd4 ' \\; split-window -d 'cmd5 ' \\; select-layout tiled \\; setw synchronize-panes},
+        q{tmux new-session 'cmd1 ' \\; split-window -d -p 50 'cmd2 ' \\; select-layout tiled \\; setw synchronize-panes},
+        q{tmux new-session 'cmd1 ' \\; split-window -d -p 33 'cmd2 ' \\; split-window -d -p 33 'cmd3 ' \\; select-layout tiled \\; setw synchronize-panes},
+        q{tmux new-session 'cmd1 ' \\; split-window -d -p 25 'cmd2 ' \\; split-window -d -p 25 'cmd3 ' \\; split-window -d -p 25 'cmd4 ' \\; select-layout tiled \\; setw synchronize-panes},
+        q{tmux new-session 'cmd1 ' \\; split-window -d -p 20 'cmd2 ' \\; split-window -d -p 20 'cmd3 ' \\; split-window -d -p 20 'cmd4 ' \\; split-window -d -p 20 'cmd5 ' \\; select-layout tiled \\; setw synchronize-panes},
     );
 
     for my $no (0 .. $#data) {
