@@ -1,5 +1,9 @@
 Revision history for App-MultiSsh
 
+0.18   2015-11-21
+        Updating for release of version 0.18
+        Adds default size to tmux panes to avoid errors with too many hosts (Mark Grimes)
+
 0.17   2015-10-14
         Updating for release of version 0.17
         Removed interleaving from todo (Ivan Wills)
