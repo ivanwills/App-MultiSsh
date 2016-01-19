@@ -94,7 +94,8 @@ sub multi_run {
     # loop over each host and run the remote command
     for my $host (@$hosts) {
         my $cmd = "ssh $host " . shell_quote($remote_cmd);
-        print "$cmd\n" if $option->{verbose} || $option->{test};
+        print "$host -\n" if $option->{verbose};
+        print "$cmd\n" if $option->{verbose} > 1 || $option->{test};
         next if $option->{test};
 
         if ( $option->{parallel} ) {
