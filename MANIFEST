@@ -21,3 +21,4 @@ t/pod.t
 t/shell_quote.t
 t/spelling.t
 t/tmux.t
+TODO.md
