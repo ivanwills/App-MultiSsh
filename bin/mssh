@@ -98,7 +98,7 @@ sub main {
     }
 
     # no command and not specified cssh or tmux
-    if ( !(@ARGV && !($option{cssh} || $option{tmux}) ) {
+    if ( !@ARGV && !($option{cssh} || $option{tmux}) ) {
         # pick cssh or tmux
         $option{cssh} = !!$option{cssh_cmd};
         $option{tmux} = !!$option{tmux_cmd};
