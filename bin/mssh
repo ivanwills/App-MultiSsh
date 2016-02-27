@@ -43,15 +43,16 @@ sub main {
     Getopt::Long::Configure('bundling');
     GetOptions(
         \%option,
-        'host|h=s@',
-        'group|g=s@',
-        'parallel|p=i',
-        'fork|f',
         'cssh|c',
-        'tmux|m',
         'cssh_cmd|cssh-cmd|C=s',
-        'tmux_cmd|tmux-cmd|T=s',
+        'fork|f',
+        'group|g=s@',
+        'host|h=s@',
         'interleave|i!',
+        'parallel|p=i',
+        'script|s=s',
+        'tmux_cmd|tmux-cmd|T=s',
+        'tmux|m',
         'test|t!',
         'verbose|v+',
         'man',
@@ -73,10 +74,12 @@ sub main {
         !@ARGV &&
         !(
             ( $option{cssh_cmd} && -x $option{cssh_cmd} ) ||
-            ( $option{tmux_cmd} && -x $option{tmux_cmd} )
+            ( $option{tmux_cmd} && -x $option{tmux_cmd} ) ||
+            ( $option{script}   && -x $option{script}   )
         )
     ) {
-        warn "You must specify a command or install or specify the location of cssh or tmux!\n";
+        warn "You must specify a command or script or install / specify the"
+            . " location of cssh or tmux!\n";
         pod2usage( -verbose => 1 );
     }
     elsif ( !@ARGV && $option{cssh} && !$option{cssh_cmd} ) {
@@ -95,7 +98,7 @@ sub main {
     }
 
     # no command and not specified cssh or tmux
-    if ( !@ARGV && !($option{cssh} || $option{tmux}) ) {
+    if ( !(@ARGV && !($option{cssh} || $option{tmux}) ) {
         # pick cssh or tmux
         $option{cssh} = !!$option{cssh_cmd};
         $option{tmux} = !!$option{tmux_cmd};
