@@ -1,5 +1,17 @@
 Revision history for App-MultiSsh
 
+0.19   2016-03-06
+        Updating for release of version 0.19
+        Fixed spelling (Ivan Wills)
+        Fixed manifest (Ivan Wills)
+        Fixed extra bracket (Ivan Wills)
+        VTide config (Ivan Wills)
+        Removing unsupported perl version from travis (Ivan Wills)
+        Fixing options (Ivan Wills)
+        Made verbose a little better (Ivan Wills)
+        Updated date (Ivan Wills)
+        Added TODO file (Ivan Wills)
+
 0.18   2015-11-21
         Updating for release of version 0.18
         Adds default size to tmux panes to avoid errors with too many hosts (Mark Grimes)
