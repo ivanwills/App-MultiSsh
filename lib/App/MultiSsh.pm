@@ -83,8 +83,8 @@ sub multi_run {
 
     if ($option->{tmux}) {
         my @cmds = map {"ssh $_ " . shell_quote($remote_cmd)} @$hosts;
-        exec tmux(@cmds) if !$option->{test};
-        print tmux(@cmds) . "\n";
+        exec tmux($option, @cmds) if !$option->{test};
+        print tmux($option, @cmds) . "\n";
         return;
     }
 
@@ -182,21 +182,28 @@ sub _read_label_line {
 }
 
 sub tmux {
-    my (@commands) = @_;
+    my ($option, @commands) = @_;
 
-    my $layout = layout(@commands);
-    my $tmux   = '';
-    my $pct    = int( 100 / scalar @commands );
+    my $layout  = layout(@commands);
+    my $tmux    = '';
+    my $final = '';
+    my $pct     = int( 100 / scalar @commands );
 
     for my $ssh (@commands) {
-        my $cmd = !$tmux ? 'new-session' : '\\; split-window -d -p ' . $pct;
+        if ( !$tmux && $option->{tmux_nested} ) {
+            $tmux = ' rename-window mssh';
+            $final = '; bash -c ' . shell_quote($ssh);
+        }
+        else {
+            my $cmd = !$tmux ? 'new-session' : '\\; split-window -d -p ' . $pct;
 
-        $tmux .= " $cmd " . shell_quote($ssh);
+            $tmux .= " $cmd " . shell_quote($ssh);
+        }
     }
 
     $tmux .= ' \\; set-window-option synchronize-panes on' if $commands[0] !~ /\s$/xms;
 
-    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes";
+    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes$final";
 }
 
 sub layout {
