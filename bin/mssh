@@ -53,6 +53,7 @@ sub main {
         'script|s=s',
         'tmux_cmd|tmux-cmd|T=s',
         'tmux|m',
+        'tmux_nested|tmux-nested|n',
         'test|t!',
         'verbose|v+',
         'man',
