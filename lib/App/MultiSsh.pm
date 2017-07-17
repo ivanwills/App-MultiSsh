@@ -184,6 +184,8 @@ sub _read_label_line {
 sub tmux {
     my ($option, @commands) = @_;
 
+    confess "No commands for tmux to run!\n" if !@commands;
+
     my $layout  = layout(@commands);
     my $tmux    = '';
     my $final = '';
