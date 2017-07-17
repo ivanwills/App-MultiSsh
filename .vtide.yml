@@ -9,9 +9,10 @@ editor:
       - some-file.eg
 name: mssh
 terminals: 
-  2: []
-
-  3: []
-
+  2:
+    edit: lib
+  3:
+    edit: bin
+    wait: 1
   4: []
 
