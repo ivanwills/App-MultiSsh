@@ -209,6 +209,10 @@ This documentation refers to mssh version 0.19.
   -m --tmux     Create a tmux session with each window pane connecting to a host
      --tmux-cmd[=]str
                 Use str as the C<tmux> program (defaults to tmux found in $PATH)
+  -n --tmux-nested
+                Use this fag when running in an existing tmux session to split up
+                the current tmux window in the same fashion as running a sepperate
+                tmux session.
 
   -v --verbose  Show more detailed option
      --VERSION  Prints the version information
