@@ -1,8 +1,8 @@
 ---
-count: 4
+count: 6
 default:
   restart: 0
-  wait: 0
+  wait: 1
 editor:
   files:
     eg:
@@ -18,9 +18,9 @@ terminals:
       - bin
       - tests
   2:
-    edit: lib
-  3:
+    restart: 1
     edit: bin
-    wait: 1
-  4: []
-
+  3:
+    edit: lib
+  4:
+    edit: t
