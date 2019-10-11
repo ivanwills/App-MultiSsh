@@ -19,6 +19,7 @@ terminals:
       - tests
   2:
     restart: 1
+    wait: 1
     edit: bin
   3:
     edit: lib
