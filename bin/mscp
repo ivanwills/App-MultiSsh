@@ -96,6 +96,7 @@ This documentation refers to mscp version 0.22.
   src           Source file(s)
   dest          Destination file or directory (if more than one source file
                 then dest must be a directory as per usual scp rules)
+                Note: only currently works for copying local files to many hosts
   -r --recurse  Recurse into subdirectories
 
   -v --verbose  Show more detailed option
