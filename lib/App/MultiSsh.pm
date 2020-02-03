@@ -194,18 +194,19 @@ sub tmux {
     for my $ssh (@commands) {
         if ( !$tmux && $option->{tmux_nested} ) {
             $tmux = ' rename-window mssh';
-            $final = '; bash -c ' . shell_quote($ssh);
+            $final = '; bash -c ' . shell_quote("echo $ssh; echo 'set-window-option synchronize-panes on|off'") . '\\;' . shell_quote($ssh);
         }
         else {
             my $cmd = !$tmux ? 'new-session' : '\\; split-window -d -p ' . $pct;
 
-            $tmux .= " $cmd " . shell_quote($ssh);
+            $tmux .= " $cmd " . shell_quote("echo $ssh") . '\\;' . shell_quote($ssh);
         }
     }
 
     $tmux .= ' \\; set-window-option synchronize-panes on' if $commands[0] !~ /\s$/xms;
 
-    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes$final";
+    warn "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes on$final";
+    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes on$final";
 }
 
 sub layout {
