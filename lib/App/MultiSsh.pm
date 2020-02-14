@@ -205,7 +205,6 @@ sub tmux {
 
     $tmux .= ' \\; set-window-option synchronize-panes on' if $commands[0] !~ /\s$/xms;
 
-    warn "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes on$final";
     return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes on$final";
 }
 
