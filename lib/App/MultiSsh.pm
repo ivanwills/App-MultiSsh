@@ -203,9 +203,10 @@ sub tmux {
         }
     }
 
-    $tmux .= ' \\; set-window-option synchronize-panes on' if $commands[0] !~ /\s$/xms;
+    my $sync = $option->{tmux_sync} ? 'on' : 'off';
+    $tmux .= " \\; set-window-option synchronize-panes $sync" if $commands[0] !~ /\s$/xms;
 
-    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes on$final";
+    return "tmux$tmux \\; select-layout tiled \\; setw synchronize-panes $sync$final";
 }
 
 sub layout {
